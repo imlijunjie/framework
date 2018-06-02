@@ -1,10 +1,12 @@
 package group.higo.framework.po;
 
+import java.util.Date;
+
 /**
  * 描述:user表的实体类
  * @version
  * @author:  Longruan
- * @创建时间: 2018-05-31
+ * @创建时间: 2018-06-01
  */
 public class User {
     /**
@@ -15,12 +17,27 @@ public class User {
     /**
      * 
      */
-    private String name;
+    private String username;
 
     /**
      * 
      */
-    private Integer age;
+    private String password;
+
+    /**
+     * 
+     */
+    private String salt;
+
+    /**
+     * 
+     */
+    private String status;
+
+    /**
+     * 
+     */
+    private Date registerTime;
 
     /**
      * 
@@ -40,33 +57,81 @@ public class User {
 
     /**
      * 
-     * @return name 
+     * @return username 
      */
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     /**
      * 
-     * @param name 
+     * @param username 
      */
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     /**
      * 
-     * @return age 
+     * @return password 
      */
-    public Integer getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
     /**
      * 
-     * @param age 
+     * @param password 
      */
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    /**
+     * 
+     * @return salt 
+     */
+    public String getSalt() {
+        return salt;
+    }
+
+    /**
+     * 
+     * @param salt 
+     */
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
+    }
+
+    /**
+     * 
+     * @return status 
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * 
+     * @param status 
+     */
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
+    }
+
+    /**
+     * 
+     * @return register_time 
+     */
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    /**
+     * 
+     * @param registerTime 
+     */
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
     }
 }

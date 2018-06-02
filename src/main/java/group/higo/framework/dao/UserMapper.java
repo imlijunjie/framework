@@ -1,9 +1,7 @@
 package group.higo.framework.dao;
 
 import group.higo.framework.po.User;
-import org.springframework.stereotype.Repository;
 
-@Repository("userMapper")
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -12,6 +10,8 @@ public interface UserMapper {
     int insertSelective(User record);
 
     User selectByPrimaryKey(Integer id);
+
+    User selectByUsername(String username);
 
     int updateByPrimaryKeySelective(User record);
 

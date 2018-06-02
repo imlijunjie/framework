@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-    ${user.name}-${user.age}
+    ${user.username}-${user.registerTime}
 </body>
 </html>
