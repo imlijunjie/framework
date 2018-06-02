@@ -18,7 +18,7 @@ public class LoginController {
 
     private static final transient Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @RequestMapping("loginPage")
+    @RequestMapping("loginpage")
     public String loginPage(){
         return "login";
     }
