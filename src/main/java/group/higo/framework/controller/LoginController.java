@@ -3,25 +3,28 @@ package group.higo.framework.controller;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
 
     private static final transient Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @RequestMapping("/index")
-    public String index() {
-        return "index";
+    @RequestMapping("loginPage")
+    public String loginPage(){
+        return "login";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String doLogin(String username, String password, Model model) {
+    @RequestMapping(value = "login")
+    public String doLogin(String username, String password, Model model, HttpServletRequest request) {
 
         // 获取当前的Subject
         Subject currentUser = SecurityUtils.getSubject();
@@ -50,9 +53,15 @@ public class LoginController {
 
         if(ex != null) {
             model.addAttribute("ex",ex);
-            return "index";
+            return "login";
         }
-        model.addAttribute("username",username);
+
+        SavedRequest savedRequest= WebUtils.getSavedRequest(request);
+        if(null!=savedRequest){
+            String contextPath = request.getSession().getServletContext().getContextPath();
+            return "redirect:"+savedRequest.getRequestUrl().replaceFirst(contextPath,"");
+        }
+
         return "home";
     }
 }

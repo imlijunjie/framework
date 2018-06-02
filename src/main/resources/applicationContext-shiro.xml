@@ -5,12 +5,13 @@
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/index"/>
-        <property name="successUrl" value="/home"/>
+        <property name="loginUrl" value="/loginPage"/>
+        <property name="successUrl" value="/"/>
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <property name="filterChainDefinitions">
             <value>
-                /login=anon
+                /loginPage=anon
+                /login = anon
                 /logout=logout
                 /error = anon
                 /** = authc

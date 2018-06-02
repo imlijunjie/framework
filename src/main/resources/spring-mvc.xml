@@ -17,6 +17,8 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <mvc:view-controller path="/" view-name="home"/>
+
     <mvc:default-servlet-handler/>
 
     <!-- 扫描controller包下的控制器 -->
