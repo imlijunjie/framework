@@ -18,6 +18,6 @@
         <input type="submit" value="登录">
         <input type="reset" value="取消">
     </form>
-    ${ex.printStackTrace()}
+    ${msg}
 </body>
 </html>
