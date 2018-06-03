@@ -1,4 +1,4 @@
-package group.higo.framework.shiro;
+package group.higo.framework.realm;
 
 import group.higo.framework.po.User;
 import group.higo.framework.service.IUserService;

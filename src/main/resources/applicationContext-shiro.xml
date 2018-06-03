@@ -6,6 +6,7 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
+        <property name="successUrl" value="/" />
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <property name="filterChainDefinitions">
             <value>
@@ -33,7 +34,7 @@
 
     <!-- Define the Shiro Realm implementation you want to use to connect to your back-end -->
     <!-- security datasource: -->
-    <bean id="myRealm" class="group.higo.framework.shiro.CustomRealm">
+    <bean id="myRealm" class="group.higo.framework.realm.CustomRealm">
         <!-- 配置MD5加密，若不进行MD5加密，这段代码不用 -->
         <property name="credentialsMatcher">
             <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
