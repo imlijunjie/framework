@@ -24,6 +24,8 @@ public class LoginController {
                 msg = "用户名/密码错误";
             } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
                 msg = "用户名/密码错误";
+            } else if ("randomcodeError".equals(exceptionClassName)) {
+                msg = "验证码错误";
             } else if (exceptionClassName != null) {
                 msg = "其他错误：" + exceptionClassName;
             }

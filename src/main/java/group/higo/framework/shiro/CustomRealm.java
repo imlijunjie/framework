@@ -1,7 +1,8 @@
-package group.higo.framework.realm;
+package group.higo.framework.shiro;
 
 import group.higo.framework.po.User;
 import group.higo.framework.service.IUserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -73,5 +74,12 @@ public class CustomRealm extends AuthorizingRealm {
 
         return simpleAuthorizationInfo;
     }
+
+    //清除缓存
+    public void clearCached() {
+        PrincipalCollection principals = SecurityUtils.getSubject().getPrincipals();
+        super.clearCache(principals);
+    }
+
 
 }

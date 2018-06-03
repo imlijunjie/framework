@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
-        <property name="successUrl" value="/" />
+        <property name="successUrl" value="/"/>
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <property name="filters">
+            <util:map>
+                <entry key="authc" value-ref="CustomFormAuthenticationFilter"/>
+            </util:map>
+        </property>
         <property name="filterChainDefinitions">
             <value>
                 <!--静态资源通过-->
-                /js/** anon
-                /images/** anon
-                /styles/** anon
+                /js/** = anon
+                /images/** = anon
+                /styles/** = anon
+                /validatecode.jsp = anon
                 /logout=logout
                 /error = anon
                 /** = authc
@@ -25,7 +31,7 @@
         <!-- Single realm app.  If you have multiple realms, use the 'realms' property instead. -->
         <property name="realm" ref="myRealm"/>
         <!--会话管理-->
-        <property name="sessionManager" ref="sessionManager" />
+        <property name="sessionManager" ref="sessionManager"/>
         <!--缓存管理-->
         <property name="cacheManager" ref="cacheManager"/>
     </bean>
@@ -34,17 +40,16 @@
 
     <!-- Define the Shiro Realm implementation you want to use to connect to your back-end -->
     <!-- security datasource: -->
-    <bean id="myRealm" class="group.higo.framework.realm.CustomRealm">
+    <bean id="myRealm" class="group.higo.framework.shiro.CustomRealm">
         <!-- 配置MD5加密，若不进行MD5加密，这段代码不用 -->
-        <property name="credentialsMatcher">
-            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-                <!-- MD5加密 -->
-                <property name="hashAlgorithmName" value="MD5"/>
-                <!-- 加密次数 -->
-                <property name="hashIterations" value="1"/>
-            </bean>
-        </property>
-        <!-- 配置MD5加密，若不进行MD5加密，这段代码不用 -->
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <!-- MD5加密 -->
+        <property name="hashAlgorithmName" value="MD5"/>
+        <!-- 加密次数 -->
+        <property name="hashIterations" value="1"/>
     </bean>
 
     <!-- 会话管理器 -->
@@ -57,7 +62,15 @@
 
     <!-- 进行缓存的操作配置 -->
     <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
+        <property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml"/>
+    </bean>
+
+    <!-- 自定义from验证器 -->
+    <bean id="CustomFormAuthenticationFilter" class="group.higo.framework.shiro.CustomFormAuthenticationFilter">
+        <!-- 表单中账号的input名称 -->
+        <property name="usernameParam" value="username" />
+        <!-- 表单中密码的input名称 -->
+        <property name="passwordParam" value="password" />
     </bean>
 
 </beans>
