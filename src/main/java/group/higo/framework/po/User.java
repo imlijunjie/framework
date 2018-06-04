@@ -1,5 +1,6 @@
 package group.higo.framework.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * @author:  Longruan
  * @创建时间: 2018-06-01
  */
-public class User {
+public class User implements Serializable{
     /**
      * 
      */

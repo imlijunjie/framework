@@ -18,10 +18,10 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
 
         String validateCode = (String) session.getAttribute("validateCode");
 
-        String randomcode = httpServletRequest.getParameter("randomcode");
+        String randomCode = httpServletRequest.getParameter("randomCode");
 
-        if(randomcode!=null && validateCode!=null && !randomcode.equals(validateCode)){
-            httpServletRequest.setAttribute("shiroLoginFailure","randomcodeError");
+        if(randomCode!=null && validateCode!=null && !randomCode.equals(validateCode)){
+            httpServletRequest.setAttribute("shiroLoginFailure","randomCodeException");
             return true;
         }
         return super.onAccessDenied(request, response);

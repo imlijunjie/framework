@@ -20,8 +20,11 @@
                 /images/** = anon
                 /styles/** = anon
                 /validatecode.jsp = anon
+                /favicon.ico = anon
                 /logout=logout
                 /error = anon
+                /home = user
+                / = user
                 /** = authc
             </value>
         </property>
@@ -34,12 +37,13 @@
         <property name="sessionManager" ref="sessionManager"/>
         <!--缓存管理-->
         <property name="cacheManager" ref="cacheManager"/>
+        <!-- 定义RememberMe的管理器 -->
+        <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
     <!-- Define the Shiro Realm implementation you want to use to connect to your back-end -->
-    <!-- security datasource: -->
     <bean id="myRealm" class="group.higo.framework.shiro.CustomRealm">
         <!-- 配置MD5加密，若不进行MD5加密，这段代码不用 -->
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
@@ -71,6 +75,24 @@
         <property name="usernameParam" value="username" />
         <!-- 表单中密码的input名称 -->
         <property name="passwordParam" value="password" />
+
+        <property name="rememberMeParam" value="rememberMe" />
+    </bean>
+
+    <!-- 定义RememberMe功能的程序管理类 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <!-- 定义在进行RememberMe功能实现的时候所需要使用到的Cookie的处理类 -->
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+
+    <!-- 配置需要向Cookie中保存数据的配置模版（RememberMe） -->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!-- 设置Cookie在浏览器中保存内容的名字，由用户自己来设置 -->
+        <constructor-arg value="rememberMe"/>
+        <!-- 保证该系统不会受到跨域的脚本操作供给 -->
+        <property name="httpOnly" value="true"/>
+        <!-- 定义Cookie的过期时间为一小时 -->
+        <property name="maxAge" value="36000"/>
     </bean>
 
 </beans>
