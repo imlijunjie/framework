@@ -29,7 +29,7 @@
         </tr>
         <tr>
             <td>验证码：</td>
-            <td><input id="randomcode" name="randomcode" size="8"><img src="${pageContext.request.contextPath}/validatecode.jsp" id="randomcode_img" onclick="randomcode_refresh()"></td>
+            <td><input id="randomcode" name="randomcode" size="8"><img style="cursor: pointer" src="${pageContext.request.contextPath}/validatecode.jsp" id="randomcode_img" onclick="randomcode_refresh()"></td>
         </tr>
         <tr>
             <td>自动登录：</td>
