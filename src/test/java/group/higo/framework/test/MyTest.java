@@ -1,10 +1,9 @@
 package group.higo.framework.test;
 
-import group.higo.framework.po.User;
-import group.higo.framework.service.IUserService;
+import group.higo.framework.po.SysUser;
+import group.higo.framework.service.ISysUserService;
 import org.apache.log4j.Logger;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.util.ByteSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.ResourceBundle;
 import java.util.UUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,11 +22,11 @@ public class MyTest {
     private static Logger logger = Logger.getLogger(MyTest.class);
 
     @Autowired
-    public IUserService userService;
+    public ISysUserService userService;
 
     @Test
     public void test() {
-        User u = userService.selectByPrimaryKey(1);
+        SysUser u = userService.selectByPrimaryKey(1);
         logger.info(u.getUsername());
     }
 
@@ -39,5 +39,12 @@ public class MyTest {
         Md5Hash md5Hash = new Md5Hash(password,salt,hashIterations);
         String passwordMd5 = md5Hash.toString();
         System.out.println("passwordMd5:"+passwordMd5);
+    }
+
+    @Test
+    public void test2(){
+        ResourceBundle resource = ResourceBundle.getBundle("system");
+        String shiro_hashIterations = resource.getString("shiro_hashIterations");
+        System.out.println("shiro_hashIterations:"+shiro_hashIterations);
     }
 }

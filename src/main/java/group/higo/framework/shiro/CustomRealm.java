@@ -1,7 +1,7 @@
 package group.higo.framework.shiro;
 
-import group.higo.framework.po.User;
-import group.higo.framework.service.IUserService;
+import group.higo.framework.po.SysUser;
+import group.higo.framework.service.ISysUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -19,8 +19,8 @@ import java.util.List;
 
 public class CustomRealm extends AuthorizingRealm {
 
-    @Resource(name = "userService")
-    private IUserService userService;
+    @Resource(name = "sysUserService")
+    private ISysUserService sysUserService;
 
     // 设置realm的名称
     @Override
@@ -36,7 +36,7 @@ public class CustomRealm extends AuthorizingRealm {
         // 第一步从token中取出身份信息（token代表用户输入的传下来的信息）
         String username = (String) token.getPrincipal();
 
-        User u = userService.selectByUsername(username);
+        SysUser u = sysUserService.selectByUsername(username);
 
         // 如果查询不到返回null
         if(null == u){
@@ -80,6 +80,5 @@ public class CustomRealm extends AuthorizingRealm {
         PrincipalCollection principals = SecurityUtils.getSubject().getPrincipals();
         super.clearCache(principals);
     }
-
 
 }

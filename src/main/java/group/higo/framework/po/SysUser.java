@@ -1,136 +1,138 @@
 package group.higo.framework.po;
 
-import java.io.Serializable;
+import lombok.ToString;
+
 import java.util.Date;
 
 /**
- * 描述:user表的实体类
+ * 描述:sys_user表的实体类
  * @version
  * @author:  Longruan
- * @创建时间: 2018-06-01
+ * @创建时间: 2018-06-05
  */
-public class User implements Serializable{
+@ToString
+public class SysUser {
     /**
-     * 
+     * 主键
      */
     private Integer id;
 
     /**
-     * 
+     * 账号
      */
     private String username;
 
     /**
-     * 
+     * 密码
      */
     private String password;
 
     /**
-     * 
+     * 盐
      */
     private String salt;
 
     /**
-     * 
+     * 状态
      */
     private String status;
 
     /**
-     * 
+     * 注册时间
      */
     private Date registerTime;
 
     /**
-     * 
-     * @return id 
+     * 主键
+     * @return id 主键
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * 
-     * @param id 
+     * 主键
+     * @param id 主键
      */
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     * 
-     * @return username 
+     * 账号
+     * @return username 账号
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * 
-     * @param username 
+     * 账号
+     * @param username 账号
      */
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
     }
 
     /**
-     * 
-     * @return password 
+     * 密码
+     * @return password 密码
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * 
-     * @param password 
+     * 密码
+     * @param password 密码
      */
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
     }
 
     /**
-     * 
-     * @return salt 
+     * 盐
+     * @return salt 盐
      */
     public String getSalt() {
         return salt;
     }
 
     /**
-     * 
-     * @param salt 
+     * 盐
+     * @param salt 盐
      */
     public void setSalt(String salt) {
         this.salt = salt == null ? null : salt.trim();
     }
 
     /**
-     * 
-     * @return status 
+     * 状态
+     * @return status 状态
      */
     public String getStatus() {
         return status;
     }
 
     /**
-     * 
-     * @param status 
+     * 状态
+     * @param status 状态
      */
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
     }
 
     /**
-     * 
-     * @return register_time 
+     * 注册时间
+     * @return register_time 注册时间
      */
     public Date getRegisterTime() {
         return registerTime;
     }
 
     /**
-     * 
-     * @param registerTime 
+     * 注册时间
+     * @param registerTime 注册时间
      */
     public void setRegisterTime(Date registerTime) {
         this.registerTime = registerTime;

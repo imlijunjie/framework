@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="group.higo.framework.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="group.higo.framework.po.User" >
+<mapper namespace="group.higo.framework.dao.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="group.higo.framework.po.SysUser" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
@@ -15,31 +15,31 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from user
+    from sys_user
     where id = #{id,jdbcType=INTEGER}
   </select>
 
   <select id="selectByUsername" resultMap="BaseResultMap" parameterType="string" >
     select
     <include refid="Base_Column_List" />
-    from user
+    from sys_user
     where username = #{username,jdbcType=VARCHAR}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user
+    delete from sys_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="group.higo.framework.po.User" >
-    insert into user (id, username, password, 
+  <insert id="insert" parameterType="group.higo.framework.po.SysUser" >
+    insert into sys_user (id, username, password, 
       salt, status, register_time
       )
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="group.higo.framework.po.User" >
-    insert into user
+  <insert id="insertSelective" parameterType="group.higo.framework.po.SysUser" >
+    insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -81,8 +81,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="group.higo.framework.po.User" >
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="group.higo.framework.po.SysUser" >
+    update sys_user
     <set >
       <if test="username != null" >
         username = #{username,jdbcType=VARCHAR},
@@ -102,8 +102,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="group.higo.framework.po.User" >
-    update user
+  <update id="updateByPrimaryKey" parameterType="group.higo.framework.po.SysUser" >
+    update sys_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},

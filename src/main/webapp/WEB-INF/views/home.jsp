@@ -14,7 +14,7 @@
 </head>
 <body class="easyui-layout">
     <div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">
-        <span style="font-size: large">platform</span><a href="logout" style="display: block;text-decoration: none">注销</a>
+        <a href="logout" style="display: block;text-decoration: none">注销</a>
     </div>
     <div id="p" data-options="region:'west'" title="导航" style="width:200px;padding:10px">
         <p>width: 200px</p>

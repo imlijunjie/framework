@@ -22,6 +22,8 @@
                 /validatecode.jsp = anon
                 /favicon.ico = anon
                 /logout=logout
+                /user/doRegister = anon
+                /register.jsp = anon
                 /error = anon
                 /home = user
                 / = user
@@ -53,7 +55,7 @@
         <!-- MD5加密 -->
         <property name="hashAlgorithmName" value="MD5"/>
         <!-- 加密次数 -->
-        <property name="hashIterations" value="1"/>
+        <property name="hashIterations" value="${shiro_hashIterations}"/>
     </bean>
 
     <!-- 会话管理器 -->
