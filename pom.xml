@@ -277,7 +277,7 @@
 
   </dependencies>
   <build>
-    <finalName>framework</finalName>
+    <finalName>app</finalName>
     <plugins>
 
       <!--打包跳过测试用例-->

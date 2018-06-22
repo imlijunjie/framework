@@ -16,7 +16,7 @@
 <%@ page import="javax.imageio.ImageIO"%>
 <%
     int width = 60;
-    int height = 32;
+    int height = 22;
     //create the image
     BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     Graphics g = image.getGraphics();
@@ -41,8 +41,8 @@
     //将生成的验证码存入session
     session.setAttribute("validatecode", capstr);
     g.setColor(new Color(0, 100, 0));
-    g.setFont(new Font("Candara", Font.BOLD, 24));
-    g.drawString(capstr, 8, 24);
+    g.setFont(new Font("Candara", Font.BOLD, 22));
+    g.drawString(capstr, 6, 16);
     g.dispose();
     //输出图片
     response.setContentType("image/jpeg");
