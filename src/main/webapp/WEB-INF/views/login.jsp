@@ -42,6 +42,7 @@
         <tr><td><a href="register.jsp">注册</a></td></tr>
         <tr>
             <td>${msg}</td>
+            <td>${validateCode}</td>
         </tr>
     </table>
 </form>

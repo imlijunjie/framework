@@ -39,7 +39,7 @@
     // generate a random code
     String capstr = hash1.substring(0, 4);
     //将生成的验证码存入session
-    session.setAttribute("validateCode", capstr);
+    session.setAttribute("validatecode", capstr);
     g.setColor(new Color(0, 100, 0));
     g.setFont(new Font("Candara", Font.BOLD, 24));
     g.drawString(capstr, 8, 24);
