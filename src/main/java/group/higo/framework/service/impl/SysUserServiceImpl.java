@@ -13,7 +13,7 @@ public class SysUserServiceImpl implements ISysUserService {
     @Resource(name = "sysUserMapper")
     private SysUserMapper sysUserMapper;
 
-    public SysUser selectByPrimaryKey(Integer id) {
+    public SysUser selectByPrimaryKey(String id) {
         return this.sysUserMapper.selectByPrimaryKey(id);
     }
 

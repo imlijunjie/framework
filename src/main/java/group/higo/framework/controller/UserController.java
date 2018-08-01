@@ -3,6 +3,7 @@ package group.higo.framework.controller;
 import group.higo.framework.po.SysUser;
 import group.higo.framework.service.ISysUserService;
 import group.higo.framework.util.SysUserUtil;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,10 @@ public class UserController {
     @Resource(name = "sysUserService")
     private ISysUserService sysUserService;
 
+    @RequiresPermissions("user:show")
     @RequestMapping("show")
     public String show(Model model){
-        SysUser u = sysUserService.selectByPrimaryKey(1);
+        SysUser u = sysUserService.selectByPrimaryKey("1");
         model.addAttribute("user",u);
         return "user";
     }

@@ -1,21 +1,18 @@
 package group.higo.framework.po;
 
-import lombok.ToString;
-
 import java.util.Date;
 
 /**
  * 描述:sys_user表的实体类
  * @version
  * @author:  Longruan
- * @创建时间: 2018-06-05
+ * @创建时间: 2018-08-01
  */
-@ToString
 public class SysUser {
     /**
      * 主键
      */
-    private Integer id;
+    private String id;
 
     /**
      * 账号
@@ -46,7 +43,7 @@ public class SysUser {
      * 主键
      * @return id 主键
      */
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -54,8 +51,8 @@ public class SysUser {
      * 主键
      * @param id 主键
      */
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     /**

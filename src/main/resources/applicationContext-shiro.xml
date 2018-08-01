@@ -77,7 +77,7 @@
         <property name="usernameParam" value="username" />
         <!-- 表单中密码的input名称 -->
         <property name="passwordParam" value="password" />
-
+        <!-- 表单中记住我的input名称 -->
         <property name="rememberMeParam" value="rememberMe" />
     </bean>
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache name="ehcache">
 
-    <diskStore path="java.io.tmpdir"/>
-
+    <!--<diskStore path="java.io.tmpdir"/>-->
+    <diskStore path="e:\tmpdir"/>
     <!--
        name:缓存名称。
        maxElementsInMemory:缓存最大数目

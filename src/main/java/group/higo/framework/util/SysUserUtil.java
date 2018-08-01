@@ -10,6 +10,8 @@ public class SysUserUtil {
 
     public static  SysUser getEncryptedUser(SysUser sysUser){
 
+        String uuid = UUID.randomUUID().toString();
+        sysUser.setId(uuid);
         ResourceBundle resource = ResourceBundle.getBundle("system");
         int hashIterations = Integer.parseInt(resource.getString("shiro_hashIterations"));
         sysUser.setSalt(UUID.randomUUID().toString());

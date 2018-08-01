@@ -1,17 +1,15 @@
 package group.higo.framework.dao;
 
 import group.higo.framework.po.SysUser;
-import org.springframework.stereotype.Repository;
 
-@Repository("sysUserMapper")
 public interface SysUserMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(SysUser record);
 
     int insertSelective(SysUser record);
 
-    SysUser selectByPrimaryKey(Integer id);
+    SysUser selectByPrimaryKey(String id);
 
     SysUser selectByUsername(String username);
 
