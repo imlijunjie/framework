@@ -21,7 +21,7 @@ public class UserController {
     @RequiresPermissions("user:show")
     @RequestMapping("show")
     public String show(Model model){
-        SysUser u = sysUserService.selectByPrimaryKey("1");
+        SysUser u = sysUserService.selectByPrimaryKey(1);
         model.addAttribute("user",u);
         return "user";
     }

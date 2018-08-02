@@ -65,7 +65,7 @@ public class CustomRealm extends AuthorizingRealm {
         List<String> permissions = new ArrayList<String>();
         permissions.add("user:create");// 用户的创建
         permissions.add("items:add");// 商品添加权限
-        permissions.add("user:show1");
+        permissions.add("user:show");
         // ....
 
         // 查到权限数据，返回授权信息(要包括 上边的permissions)

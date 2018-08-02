@@ -26,7 +26,7 @@ public class MyTest {
 
     @Test
     public void test() {
-        SysUser u = userService.selectByPrimaryKey("1");
+        SysUser u = userService.selectByPrimaryKey(1);
         logger.info(u.getUsername());
     }
 

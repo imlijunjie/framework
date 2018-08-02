@@ -2,7 +2,7 @@
 <ehcache name="ehcache">
 
     <!--<diskStore path="java.io.tmpdir"/>-->
-    <diskStore path="e:\tmpdir"/>
+    <diskStore path="F:\shiro\ehcache" />
     <!--
        name:缓存名称。
        maxElementsInMemory:缓存最大数目
