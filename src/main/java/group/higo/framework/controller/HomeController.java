@@ -20,9 +20,12 @@ public class HomeController {
 
     @RequestMapping("getZtreeJson")
     @ResponseBody
-    public List<MyTree> getZtreeJson() {
+    public List<MyTree> getZtreeJson(Integer id) {
+        if(id == null){
+            id = 0;
+        }
         List<MyTree> zTrees = null;
-        List<SysPermission> list = this.sysService.getSysPermissionByPid(0);
+        List<SysPermission> list = this.sysService.getSysPermissionByPid(id);
         if (null != list && list.size() > 0) {
             zTrees = new ArrayList<>();
             for (SysPermission sysPermission : list) {
@@ -49,5 +52,12 @@ public class HomeController {
         }
         tree.setChildren(zTrees);
         return tree;
+    }
+
+    @RequestMapping("getTopMenu")
+    @ResponseBody
+    public List getTopMenu(Integer id){
+        List<SysPermission> top_menu = sysService.getSysPermissionByPid(id);
+        return top_menu;
     }
 }

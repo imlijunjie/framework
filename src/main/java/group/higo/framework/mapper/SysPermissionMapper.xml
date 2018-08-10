@@ -145,6 +145,7 @@
     from sys_permission
     where pid = #{id,jdbcType=INTEGER}
     AND available = 1
+    AND type LIKE '%menu'
   </select>
 
 </mapper>

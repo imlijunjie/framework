@@ -41,7 +41,7 @@
 <script>
     function randomcode_refresh() {
         var obj = document.getElementById("randomcode_img");
-        obj.src = "${pageContext.request.contextPath}/validatecode.jsp?rnd" + Math.random();
+        obj.src = "${pageContext.request.contextPath}/getCode?rnd" + Math.random();
     }
 </script>
 <body>
@@ -59,7 +59,7 @@
             <tr>
                 <td style="color: white">验证码：</td>
                 <td><input class="form-input" id="randomcode" name="randomcode" size="8"></td>
-                <td><img style="cursor: pointer" src="${pageContext.request.contextPath}/validatecode.jsp"
+                <td><img style="cursor: pointer" src="${pageContext.request.contextPath}/getCode"
                          id="randomcode_img" onclick="randomcode_refresh()"></td>
             </tr>
             <tr>

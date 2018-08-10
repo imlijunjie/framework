@@ -4,6 +4,7 @@ import group.higo.framework.po.SysUser;
 import group.higo.framework.service.ISysUserService;
 import org.apache.log4j.Logger;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,12 @@ public class MyTest {
         ResourceBundle resource = ResourceBundle.getBundle("system");
         String shiro_hashIterations = resource.getString("shiro_hashIterations");
         System.out.println("shiro_hashIterations:"+shiro_hashIterations);
+    }
+
+    @Test
+    public void test3(){
+        SimpleHash hash = new SimpleHash("SHA1", "admin", "5298a9e4-b4ca-4088-bfea-b9f7fda7eb61", 1);
+        String encodedPassword = hash.toHex();
+        System.out.println(encodedPassword);
     }
 }

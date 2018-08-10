@@ -12,9 +12,11 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 
+
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
         HttpSession session = httpServletRequest.getSession();
+
 
         String validatecode = (String) session.getAttribute("validatecode");
 
