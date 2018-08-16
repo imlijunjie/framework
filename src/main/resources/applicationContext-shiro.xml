@@ -25,8 +25,8 @@
                 /user/doRegister = anon
                 /register.jsp = anon
                 /error = anon
-                / = user
-                /** = authc
+                /login = authc
+                /** = user
             </value>
         </property>
     </bean>
@@ -95,7 +95,7 @@
         <!-- 保证该系统不会受到跨域的脚本操作供给 -->
         <property name="httpOnly" value="true"/>
         <!-- 定义Cookie的过期时间为一小时 -->
-        <property name="maxAge" value="36000"/>
+        <property name="maxAge" value="259200"/>
     </bean>
 
 </beans>

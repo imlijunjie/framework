@@ -49,6 +49,7 @@
         function init() {
             loadNav();
             $("#my_nav").on("click", "li", function () {
+                console.info($(this).text());
                 if (!$(this).hasClass('active')) {
                     loadTree($(this).children("a:first").attr('id'));
                 }
@@ -83,7 +84,7 @@
 
         //加载顶层导航栏
         function loadNav() {
-            $.get('home/getTopMenu', {id: 0}, function (r) {
+            $.get('home/getTopMenu?random='+Math.random(), {id: 0}, function (r) {
                 $.each(r, function () {
                     $("#my_nav").append('<li><a id="' + this.id + '" href="javascript:;" >' + this.name + '</a></li>')
                 });

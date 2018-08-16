@@ -12,17 +12,15 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 
-
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
         HttpSession session = httpServletRequest.getSession();
-
 
         String validatecode = (String) session.getAttribute("validatecode");
 
         String randomcode = httpServletRequest.getParameter("randomcode");
 
-        if(randomcode!=null && validatecode!=null && !randomcode.equals(validatecode)){
+        if(randomcode!=null && validatecode!=null && !randomcode.trim().equals(validatecode)){
             httpServletRequest.setAttribute("shiroLoginFailure","randomCodeException");
             return true;
         }
