@@ -56,7 +56,7 @@ public class HomeController {
 
     @RequestMapping("getTopMenu")
     @ResponseBody
-    public List getTopMenu(Integer id){
+    public List<SysPermission> getTopMenu(Integer id){
         List<SysPermission> top_menu = sysService.getSysPermissionByPid(id);
         return top_menu;
     }

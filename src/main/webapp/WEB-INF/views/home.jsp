@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Platform Demo</title>
+    <title>Framework</title>
     <jsp:include page="common.jsp"/>
     <style>
         #my_nav {
@@ -18,7 +18,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #B3DFDA;
+            background-color: dodgerblue;
         }
 
         #my_nav > li {
@@ -34,11 +34,11 @@
         }
 
         #my_nav > li a:hover:not(.active) {
-            background-color: #4CAF50;
+            background-color: royalblue;
         }
 
         .active {
-            background-color: #4CAF50;
+            background-color: royalblue;
         }
     </style>
     <script>
@@ -46,8 +46,14 @@
             init();
         });
 
-        function init(){
+        function init() {
             loadNav();
+            $("#my_nav").on("click", "li", function () {
+                if (!$(this).hasClass('active')) {
+                    loadTree($(this).children("a:first").attr('id'));
+                }
+                $(this).addClass("active").siblings().removeClass("active");
+            });
         }
 
         //是否是叶子节点
@@ -57,43 +63,42 @@
 
         //加载tabs
         function loadTab(node) {
-            if ($('#tt').tabs('exists', node.text)){
+            if ($('#tt').tabs('exists', node.text)) {
                 $('#tt').tabs('select', node.text);
-            }else{
-                if(node.obj.url){
-                var content = '<iframe scrolling="auto" frameborder="0"  src="'+node.obj.url+'" style="width:100%;height:100%;"></iframe>';
+            } else {
+                if (node.obj.url) {
+                    var content = '<iframe scrolling="auto" frameborder="0"  src="' + node.obj.url + '" style="width:100%;height:100%;"></iframe>';
 
-                }else {
+                } else {
                     var content = '空地址'
                 }
-                $('#tt').tabs('add',{
-                    id:node.id,
-                    title:node.text,
-                    content:content,
-                    closable:true
+                $('#tt').tabs('add', {
+                    id: node.id,
+                    title: node.text,
+                    content: content,
+                    closable: true
                 });
             }
         }
 
         //加载顶层导航栏
-        function loadNav(){
-            $.get('home/getTopMenu',{id:0},function (r) {
-                $.each(r,function () {
-                    // $("#my_nav").append('<a href="#" class="easyui-linkbutton" data-options="plain:true" onclick="loadTree('+this.id+')">'+this.name+'</a>')
-                    $("#my_nav").append('<li><a id="'+this.id+'" href="javascript:;" onclick="loadTree('+this.id+')">'+this.name+'</a></li>')
-                })
-                $("#my_nav li:first-child a").addClass("active");
+        function loadNav() {
+            $.get('home/getTopMenu', {id: 0}, function (r) {
+                $.each(r, function () {
+                    $("#my_nav").append('<li><a id="' + this.id + '" href="javascript:;" >' + this.name + '</a></li>')
+                });
+                //选中第一个导航
+                $("#my_nav li:first").addClass("active");
+                //加载第一个导航下属菜单
                 loadTree($("#my_nav li:first-child a").attr('id'));
             });
         }
 
-
-
         //加载菜单
-        function loadTree(id){
+        function loadTree(id) {
             $("#etree").tree({
                 url: 'home/getZtreeJson',
-                queryParams:{id:id},
+                queryParams: {id: id},
                 lines: true,
                 onClick: function (node) {
                     console.info(node.text + isLeaf(node.target));
@@ -107,10 +112,10 @@
     </script>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'north',border:false" style="height:40px;background:#B3DFDA;">
+<div data-options="region:'north',border:false" style="height:40px;background:dodgerblue">
     <div class="easyui-layout" data-options="fit:true">
-        <div data-options="region:'west',border:false" style="width:200px;background:#B3DFDA;">Logo</div>
-        <div data-options="region:'east',border:false" style="width:100px;background:#B3DFDA;">
+        <div data-options="region:'west',border:false" style="width:200px;background:dodgerblue;color: white;">Logo</div>
+        <div data-options="region:'east',border:false" style="width:100px;background:dodgerblue;color: white;">
             <shiro:principal/>
             <a href="logout" style="display:block;text-decoration: none">注销</a>
         </div>
@@ -126,17 +131,6 @@
     <div id="tt" class="easyui-tabs" data-options="fit:true,narrow:true">
         <div title="首页" style="padding:10px">
             <p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>
-            <ul>
-                <li>easyui is a collection of user-interface plugin based on jQuery.</li>
-                <li>easyui provides essential functionality for building modem, interactive, javascript applications.
-                </li>
-                <li>using easyui you don't need to write many javascript code, you usually defines user-interface by
-                    writing some HTML markup.
-                </li>
-                <li>complete framework for HTML5 web page.</li>
-                <li>easyui save your time and scales while developing your products.</li>
-                <li>easyui is very easy but powerful.</li>
-            </ul>
         </div>
     </div>
 </div>
