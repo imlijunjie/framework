@@ -19,7 +19,7 @@ public class SysController {
     @Resource(name = "sysService")
     private ISysService sysService;
 
-    @RequiresPermissions("user")
+    @RequiresPermissions("user:view")
     @RequestMapping("sysUserIndex")
     public String sysUserListIndex(){
         return "sysUser";

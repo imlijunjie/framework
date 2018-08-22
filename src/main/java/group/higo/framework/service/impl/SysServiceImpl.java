@@ -96,4 +96,9 @@ public class SysServiceImpl implements ISysService {
     public int getSysUserListCount(Map param) {
         return sysUserMapper.getSysUserListCount(param);
     }
+
+    @Override
+    public List<String> getSysPermissionByUserid(Integer userid) {
+        return sysPermissionMapper.getSysPermissionByUserid(userid);
+    }
 }

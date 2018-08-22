@@ -178,4 +178,13 @@
         )
         </if>
     </select>
+
+  <select id="getSysPermissionByUserid" parameterType="int" resultType="string">
+      SELECT
+	      sp.percode
+      FROM
+          sys_permission sp
+      WHERE
+          sp.id IN ( SELECT srp.permissionid FROM sys_role_permission srp WHERE srp.roleid IN ( SELECT roleid FROM sys_user_role sur WHERE sur.userid = #{userid,jdbcType=INTEGER} ) )
+  </select>
 </mapper>

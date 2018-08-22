@@ -18,6 +18,7 @@ public class UserController {
     @Resource(name = "sysUserService")
     private ISysUserService sysUserService;
 
+    @RequiresPermissions("res:view")
     @RequestMapping("show")
     public String show(Model model){
         SysUser u = sysUserService.selectByPrimaryKey(1);

@@ -13,4 +13,6 @@ public interface ISysService {
 
     int getSysUserListCount(Map param);
 
+    List<String> getSysPermissionByUserid(Integer userid);
+
 }

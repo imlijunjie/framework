@@ -21,4 +21,6 @@ public interface SysPermissionMapper {
     int updateByPrimaryKey(SysPermission record);
 	
 	List getSysPermissionByPid(Map map);
+
+	List getSysPermissionByUserid(Integer userid);
 }

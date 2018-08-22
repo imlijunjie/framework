@@ -1,6 +1,7 @@
 package group.higo.framework.shiro;
 
 import group.higo.framework.po.SysUser;
+import group.higo.framework.service.ISysService;
 import group.higo.framework.service.ISysUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -20,6 +21,9 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Resource(name = "sysUserService")
     private ISysUserService sysUserService;
+
+    @Resource(name = "sysService")
+    private ISysService sysService;
 
     // 设置realm的名称
     @Override
@@ -62,18 +66,12 @@ public class CustomRealm extends AuthorizingRealm {
         user.getUsername();
         ResourceBundle resource = ResourceBundle.getBundle("system");
         String administrator = resource.getString("administrator");
+
         if(administrator.contains(user.getUsername())){
             permissions.add("*");
         }else{
-            // 根据身份信息获取权限信息
-            // 连接数据库...
-            // 模拟从数据库获取到数据
-
-            permissions.add("user:add");// 用户的创建
-            permissions.add("user");
-            // ....
-
-            // 查到权限数据，返回授权信息(要包括 上边的permissions)
+            List permissionList = sysService.getSysPermissionByUserid(user.getId());
+            permissions.addAll(permissionList);
         }
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
