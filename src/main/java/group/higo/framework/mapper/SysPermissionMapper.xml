@@ -6,14 +6,15 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
     <result column="percode" property="percode" jdbcType="VARCHAR" />
-    <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
     <result column="pids" property="pids" jdbcType="VARCHAR" />
     <result column="orderid" property="orderid" jdbcType="VARCHAR" />
-    <result column="available" property="available" jdbcType="VARCHAR" />
+    <result column="available" property="available" jdbcType="CHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, type, url, percode, pid, pids, orderid, available
+    id, name, type, url, icon, percode, pid, pids, orderid, available
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,13 +28,13 @@
   </delete>
   <insert id="insert" parameterType="group.higo.framework.po.SysPermission" >
     insert into sys_permission (id, name, type, 
-      url, percode, pid, 
-      pids, orderid, available
-      )
+      url, icon, percode, 
+      pid, pids, orderid, 
+      available)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{percode,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, 
-      #{pids,jdbcType=VARCHAR}, #{orderid,jdbcType=VARCHAR}, #{available,jdbcType=VARCHAR}
-      )
+      #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{percode,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=INTEGER}, #{pids,jdbcType=VARCHAR}, #{orderid,jdbcType=VARCHAR}, 
+      #{available,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="group.higo.framework.po.SysPermission" >
     insert into sys_permission
@@ -49,6 +50,9 @@
       </if>
       <if test="url != null" >
         url,
+      </if>
+      <if test="icon != null" >
+        icon,
       </if>
       <if test="percode != null" >
         percode,
@@ -79,11 +83,14 @@
       <if test="url != null" >
         #{url,jdbcType=VARCHAR},
       </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
       <if test="percode != null" >
         #{percode,jdbcType=VARCHAR},
       </if>
       <if test="pid != null" >
-        #{pid,jdbcType=VARCHAR},
+        #{pid,jdbcType=INTEGER},
       </if>
       <if test="pids != null" >
         #{pids,jdbcType=VARCHAR},
@@ -92,7 +99,7 @@
         #{orderid,jdbcType=VARCHAR},
       </if>
       <if test="available != null" >
-        #{available,jdbcType=VARCHAR},
+        #{available,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -108,11 +115,14 @@
       <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
       </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
       <if test="percode != null" >
         percode = #{percode,jdbcType=VARCHAR},
       </if>
       <if test="pid != null" >
-        pid = #{pid,jdbcType=VARCHAR},
+        pid = #{pid,jdbcType=INTEGER},
       </if>
       <if test="pids != null" >
         pids = #{pids,jdbcType=VARCHAR},
@@ -121,7 +131,7 @@
         orderid = #{orderid,jdbcType=VARCHAR},
       </if>
       <if test="available != null" >
-        available = #{available,jdbcType=VARCHAR},
+        available = #{available,jdbcType=CHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -131,21 +141,41 @@
     set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
       percode = #{percode,jdbcType=VARCHAR},
-      pid = #{pid,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
       pids = #{pids,jdbcType=VARCHAR},
       orderid = #{orderid,jdbcType=VARCHAR},
-      available = #{available,jdbcType=VARCHAR}
+      available = #{available,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
-  <select id="getSysPermissionByPid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from sys_permission
-    where pid = #{id,jdbcType=INTEGER}
-    AND available = 1
-    AND type LIKE '%menu'
-  </select>
-
+      <select id="getSysPermissionByPid" resultMap="BaseResultMap" parameterType="map">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+          sys_permission sp
+        WHERE
+          sp.available = 1
+        AND sp.pid = #{pid,jdbcType=INTEGER}
+        <if test="type != null">
+        AND sp.type = #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="userid != null">
+        AND sp.id IN (
+            SELECT
+            srp.permissionid
+            FROM
+            sys_role_permission srp
+            WHERE
+            srp.roleid IN (
+                SELECT
+                roleid
+                FROM
+                sys_user_role sur
+                WHERE
+                sur.userid = #{userid,jdbcType=INTEGER}
+            )
+        )
+        </if>
+    </select>
 </mapper>

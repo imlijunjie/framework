@@ -4,28 +4,33 @@ package group.higo.framework.po;
  * 描述:sys_permission表的实体类
  * @version
  * @author:  Longruan
- * @创建时间: 2018-08-02
+ * @创建时间: 2018-08-22
  */
 public class SysPermission {
     /**
-     * 
+     * 主键ID
      */
     private Integer id;
 
     /**
-     * 
+     * 名称
      */
     private String name;
 
     /**
-     * top_menu,left_menu,button
+     * 类型：top_menu,left_menu,button
      */
     private String type;
 
     /**
-     * 
+     * 请求地址
      */
     private String url;
+
+    /**
+     * 图标
+     */
+    private String icon;
 
     /**
      * 权限编码值（唯一）
@@ -33,87 +38,103 @@ public class SysPermission {
     private String percode;
 
     /**
-     * 
+     * 父节点ID
      */
-    private String pid;
+    private Integer pid;
 
     /**
-     * 
+     * 父节点串
      */
     private String pids;
 
     /**
-     * 
+     * 排序
      */
     private String orderid;
 
     /**
-     * 
+     * 启用状态
      */
     private String available;
 
     /**
-     * 
-     * @return id 
+     * 主键ID
+     * @return id 主键ID
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * 
-     * @param id 
+     * 主键ID
+     * @param id 主键ID
      */
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     * 
-     * @return name 
+     * 名称
+     * @return name 名称
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @param name 
+     * 名称
+     * @param name 名称
      */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
 
     /**
-     * top_menu,left_menu,button
-     * @return type top_menu,left_menu,button
+     * 类型：top_menu,left_menu,button
+     * @return type 类型：top_menu,left_menu,button
      */
     public String getType() {
         return type;
     }
 
     /**
-     * top_menu,left_menu,button
-     * @param type top_menu,left_menu,button
+     * 类型：top_menu,left_menu,button
+     * @param type 类型：top_menu,left_menu,button
      */
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
     }
 
     /**
-     * 
-     * @return url 
+     * 请求地址
+     * @return url 请求地址
      */
     public String getUrl() {
         return url;
     }
 
     /**
-     * 
-     * @param url 
+     * 请求地址
+     * @param url 请求地址
      */
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
+    }
+
+    /**
+     * 图标
+     * @return icon 图标
+     */
+    public String getIcon() {
+        return icon;
+    }
+
+    /**
+     * 图标
+     * @param icon 图标
+     */
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
     }
 
     /**
@@ -133,64 +154,64 @@ public class SysPermission {
     }
 
     /**
-     * 
-     * @return pid 
+     * 父节点ID
+     * @return pid 父节点ID
      */
-    public String getPid() {
+    public Integer getPid() {
         return pid;
     }
 
     /**
-     * 
-     * @param pid 
+     * 父节点ID
+     * @param pid 父节点ID
      */
-    public void setPid(String pid) {
-        this.pid = pid == null ? null : pid.trim();
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
     /**
-     * 
-     * @return pids 
+     * 父节点串
+     * @return pids 父节点串
      */
     public String getPids() {
         return pids;
     }
 
     /**
-     * 
-     * @param pids 
+     * 父节点串
+     * @param pids 父节点串
      */
     public void setPids(String pids) {
         this.pids = pids == null ? null : pids.trim();
     }
 
     /**
-     * 
-     * @return orderid 
+     * 排序
+     * @return orderid 排序
      */
     public String getOrderid() {
         return orderid;
     }
 
     /**
-     * 
-     * @param orderid 
+     * 排序
+     * @param orderid 排序
      */
     public void setOrderid(String orderid) {
         this.orderid = orderid == null ? null : orderid.trim();
     }
 
     /**
-     * 
-     * @return available 
+     * 启用状态
+     * @return available 启用状态
      */
     public String getAvailable() {
         return available;
     }
 
     /**
-     * 
-     * @param available 
+     * 启用状态
+     * @param available 启用状态
      */
     public void setAvailable(String available) {
         this.available = available == null ? null : available.trim();

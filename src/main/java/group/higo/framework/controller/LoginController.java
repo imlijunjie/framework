@@ -1,9 +1,6 @@
 package group.higo.framework.controller;
 
-import com.sun.org.apache.xerces.internal.impl.xs.util.XSObjectListImpl;
-import group.higo.framework.po.SysPermission;
-import group.higo.framework.service.ISysService;
-import group.higo.framework.util.ValidateCodeUtil;
+import group.higo.framework.util.ValidateCodeUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -14,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.RenderedImage;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -64,7 +59,7 @@ public class LoginController {
     public void getCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         // 调用工具类生成的验证码和验证码图片
-        Map<String, Object> codeMap = ValidateCodeUtil.generateCodeAndPic();
+        Map<String, Object> codeMap = ValidateCodeUtils.generateCodeAndPic();
 
         // 将四位数字的验证码保存到Session中。
         HttpSession session = request.getSession();

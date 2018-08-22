@@ -1,16 +1,17 @@
 package group.higo.framework.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 描述:sys_user表的实体类
  * @version
  * @author:  Longruan
- * @创建时间: 2018-08-02
+ * @创建时间: 2018-08-22
  */
-public class SysUser {
+public class SysUser implements Serializable{
     /**
-     * 主键
+     * 主键ID
      */
     private Integer id;
 
@@ -40,16 +41,16 @@ public class SysUser {
     private Date registerTime;
 
     /**
-     * 主键
-     * @return id 主键
+     * 主键ID
+     * @return id 主键ID
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     * 主键
-     * @param id 主键
+     * 主键ID
+     * @param id 主键ID
      */
     public void setId(Integer id) {
         this.id = id;

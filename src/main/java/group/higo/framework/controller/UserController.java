@@ -2,7 +2,7 @@ package group.higo.framework.controller;
 
 import group.higo.framework.po.SysUser;
 import group.higo.framework.service.ISysUserService;
-import group.higo.framework.util.SysUserUtil;
+import group.higo.framework.util.SysUserUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,6 @@ public class UserController {
     @Resource(name = "sysUserService")
     private ISysUserService sysUserService;
 
-    @RequiresPermissions("user:show")
     @RequestMapping("show")
     public String show(Model model){
         SysUser u = sysUserService.selectByPrimaryKey(1);
@@ -29,7 +28,7 @@ public class UserController {
     @RequestMapping("doRegister")
     @ResponseBody
     public String doRegister(SysUser sysUser){
-        sysUser = SysUserUtil.getEncryptedUser(sysUser);
+        sysUser = SysUserUtils.getEncryptedUser(sysUser);
         int flag = sysUserService.insertSelective(sysUser);
         return String.valueOf(flag);
     }

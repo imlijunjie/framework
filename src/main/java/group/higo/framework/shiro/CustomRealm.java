@@ -14,8 +14,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CustomRealm extends AuthorizingRealm {
 
@@ -44,7 +43,7 @@ public class CustomRealm extends AuthorizingRealm {
         }
 
         // 如果查询到返回认证信息AuthenticationInfo
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(username,
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(u,
                 u.getPassword(), ByteSource.Util.bytes(u.getSalt()),
                 this.getName());
 
@@ -55,24 +54,31 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
+        Set<String> permissions = new HashSet<>();
         // 从 principals获取主身份信息
         // 将getPrimaryPrincipal方法返回值转为真实身份类型（在上边的doGetAuthenticationInfo认证通过填充到SimpleAuthenticationInfo中身份类型），
-        String userCode = (String) principals.getPrimaryPrincipal();
+        SysUser user = (SysUser) principals.getPrimaryPrincipal();
+        //判断当前用户是否是配置的全权限账号
+        user.getUsername();
+        ResourceBundle resource = ResourceBundle.getBundle("system");
+        String administrator = resource.getString("administrator");
+        if(administrator.contains(user.getUsername())){
+            permissions.add("*");
+        }else{
+            // 根据身份信息获取权限信息
+            // 连接数据库...
+            // 模拟从数据库获取到数据
 
-        // 根据身份信息获取权限信息
-        // 连接数据库...
-        // 模拟从数据库获取到数据
-        List<String> permissions = new ArrayList<String>();
-        permissions.add("user:create");// 用户的创建
-        permissions.add("items:add");// 商品添加权限
-        permissions.add("user:show");
-        // ....
+            permissions.add("user:add");// 用户的创建
+            permissions.add("user");
+            // ....
 
-        // 查到权限数据，返回授权信息(要包括 上边的permissions)
+            // 查到权限数据，返回授权信息(要包括 上边的permissions)
+        }
+
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         // 将上边查询到授权信息填充到simpleAuthorizationInfo对象中
         simpleAuthorizationInfo.addStringPermissions(permissions);
-
         return simpleAuthorizationInfo;
     }
 

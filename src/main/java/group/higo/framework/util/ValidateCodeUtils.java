@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class ValidateCodeUtil {
+public class ValidateCodeUtils {
     private static int width = 80;// 定义图片的width
     private static int height = 20;// 定义图片的height
     private static int codeCount = 4;// 定义图片上显示验证码的个数
@@ -97,7 +97,7 @@ public class ValidateCodeUtil {
     public static void main(String[] args) throws Exception {
         //创建文件输出流对象
         OutputStream out = new FileOutputStream("F:" + File.separator + "codeImage" + File.separator + System.currentTimeMillis() + ".jpg");
-        Map<String, Object> map = ValidateCodeUtil.generateCodeAndPic();
+        Map<String, Object> map = ValidateCodeUtils.generateCodeAndPic();
         ImageIO.write((RenderedImage) map.get("codePic"), "jpeg", out);
         System.out.println("验证码的值为：" + map.get("code"));
     }

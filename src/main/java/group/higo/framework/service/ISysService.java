@@ -1,12 +1,16 @@
 package group.higo.framework.service;
 
-import group.higo.framework.po.SysPermission;
-
 import java.util.List;
+import java.util.Map;
 
 public interface ISysService {
 
-    SysPermission getSysPermissionById(Integer id);
+    List getTopMenu(Integer userid);
 
-    List getSysPermissionByPid(Integer id);
+    List getSysPermissionTree(Integer pid,String type, Integer userid);
+
+    List getSysUserList(Map param);
+
+    int getSysUserListCount(Map param);
+
 }

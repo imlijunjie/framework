@@ -16,7 +16,7 @@
         padding: 0;
         border: 0;
         background: url("${pageContext.request.contextPath}/images/bg.jpg") no-repeat;
-        background-size: 100%
+        background-size: cover;
     }
 
     #loginPanel {

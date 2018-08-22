@@ -3,11 +3,11 @@
 <mapper namespace="group.higo.framework.dao.SysRoleMapper" >
   <resultMap id="BaseResultMap" type="group.higo.framework.po.SysRole" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="rolename" property="rolename" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, rolename, remark
+    id, name, remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -20,9 +20,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="group.higo.framework.po.SysRole" >
-    insert into sys_role (id, rolename, remark
+    insert into sys_role (id, name, remark
       )
-    values (#{id,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="group.higo.framework.po.SysRole" >
@@ -31,8 +31,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="rolename != null" >
-        rolename,
+      <if test="name != null" >
+        name,
       </if>
       <if test="remark != null" >
         remark,
@@ -42,8 +42,8 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="rolename != null" >
-        #{rolename,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
@@ -53,8 +53,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="group.higo.framework.po.SysRole" >
     update sys_role
     <set >
-      <if test="rolename != null" >
-        rolename = #{rolename,jdbcType=VARCHAR},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
@@ -64,7 +64,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="group.higo.framework.po.SysRole" >
     update sys_role
-    set rolename = #{rolename,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

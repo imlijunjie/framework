@@ -49,7 +49,6 @@
         function init() {
             loadNav();
             $("#my_nav").on("click", "li", function () {
-                console.info($(this).text());
                 if (!$(this).hasClass('active')) {
                     loadTree($(this).children("a:first").attr('id'));
                 }
@@ -84,7 +83,7 @@
 
         //加载顶层导航栏
         function loadNav() {
-            $.get('home/getTopMenu?random='+Math.random(), {id: 0}, function (r) {
+            $.get('home/getTopMenu', function (r) {
                 $.each(r, function () {
                     $("#my_nav").append('<li><a id="' + this.id + '" href="javascript:;" >' + this.name + '</a></li>')
                 });
@@ -99,10 +98,9 @@
         function loadTree(id) {
             $("#etree").tree({
                 url: 'home/getZtreeJson',
-                queryParams: {id: id},
+                queryParams: {id: id,type:'menu'},
                 lines: true,
                 onClick: function (node) {
-                    console.info(node.text + isLeaf(node.target));
                     if (isLeaf(node.target)) {
                         loadTab(node);
                     }
@@ -117,10 +115,10 @@
     <div class="easyui-layout" data-options="fit:true">
         <div data-options="region:'west',border:false" style="width:200px;background:dodgerblue;color: white;">Logo</div>
         <div data-options="region:'east',border:false" style="width:100px;background:dodgerblue;color: white;">
-            <shiro:principal/>
+            <shiro:principal property="username" />
             <a href="logout" style="display:block;text-decoration: none">注销</a>
         </div>
-        <div data-options="region:'center',border:false">
+        <div data-options="region:'center',border:false" style="background:dodgerblue">
             <ul id="my_nav"></ul>
         </div>
     </div>

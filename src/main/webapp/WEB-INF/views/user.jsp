@@ -9,8 +9,26 @@
 <html>
 <head>
     <title>Title</title>
+    <jsp:include page="common.jsp"/>
+    <script>
+        $(function () {
+            $("#ttree").tree({
+                url: '${pageContext.request.contextPath}/home/getZtreeJson',
+                queryParams: {id: 0},
+                lines: true,
+                checkbox:true
+            });
+        });
+
+        function getCheckNode() {
+            var nodes = $('#ttree').tree('getChecked', ['checked','indeterminate']);
+            parent.$.messager.alert('Info','选中：'+nodes.length);
+        }
+    </script>
 </head>
 <body>
-    ${user.username}-${user.registerTime}
+    <a id="btn" onclick="getCheckNode()" class="easyui-linkbutton" data-options="plain:true">获取选中节点</a>
+    <ul id="ttree">
+    </ul>
 </body>
 </html>
