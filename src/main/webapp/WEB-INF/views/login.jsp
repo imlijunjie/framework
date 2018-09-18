@@ -30,19 +30,25 @@
         margin-top: -80px;
     }
 
-    .form-input{
+    .form-input {
         /*background: transparent;*/
         background-color: transparent;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         /*box-shadow: inset 0 0 4px rgba(255,255,255,0.2),0 0 4px rgba(255,255,255,0.2);*/
     }
 
 </style>
 <script>
+
+    if (window != top) {
+        top.location.href = "/framework";
+    }
+
     function randomcode_refresh() {
         var obj = document.getElementById("randomcode_img");
         obj.src = "${pageContext.request.contextPath}/getCode?rnd" + Math.random();
     }
+
 </script>
 <body>
 <div id="loginPanel">
@@ -67,7 +73,8 @@
                 <td><input type="checkbox" name="rememberMe"></td>
             </tr>
             <tr>
-                <td colspan="3"><input id="loginBtn" type="submit" value="登录" style="background: #0092DC;width: 100%;height: 30px"></td>
+                <td colspan="3"><input id="loginBtn" type="submit" value="登录"
+                                       style="background: #0092DC;width: 100%;height: 30px"></td>
             </tr>
             <tr>
                 <td><a href="register.jsp">注册</a></td>
